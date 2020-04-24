@@ -1,0 +1,23 @@
+body{
+    background:mediumslateblue;
+}
+ul{
+    height:auto;
+    /* background: #000; */
+    width:80%;
+}
+li{
+    list-style: none;;
+    height:50px;
+    width: 80%;
+    border:1px solid navy;
+    margin-left:220px;
+    margin-top: 30px;
+}
+.op{
+    /* display: none; */
+    /* background: #000; */
+}
+button:hover ul>li>op{
+    color: green;
+}

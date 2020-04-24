@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+body {
+  background: #eee;
+  color: #444;
+  font-family: 'Helvetica', arial, sans-serif;
+}
+
+
+
+input {
+  border: none;
+  display: block;
+  width: 98.4%;
+  line-height: 1.5;
+  padding: 8px 0 8px 10px;
+  border-bottom: 1px solid #cfcbcc;
+  outline:0;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+  li {
+    color: #899098;
+    font-weight: 400;
+    border-bottom: 1px solid #cfcbcc;
+    line-height: 1.5;
+    padding: 8px 0;
+  }
+    li:before {
+      content: "\25A1";
+      padding: 10px 10px;
+      font-size: 20px;
+    }
+    li:hover {
+      text-decoration: line-through;
+      cursor: pointer;
+    }
+    
+    li:last-child {
+      border-bottom: none;
+    }
+
+.checked {
+  color:green;}
+    .checked:before {
+      content: "\2713";
+      padding: 10px 10px;
+      font-size: 20px;}
+    
+    .checked:hover {
+      text-decoration: none;}
+      .checked:after {
+        content: "(remove)";
+        color: tomato;
+        text-align: right;
+      }
+    </style>
+</head>
+<body>
+    <form  action="#">
+        <input type="text" name="item" id="item" placeholder="Add New" />
+    </form>  
+    <ul id="list"></ul>
+</body>
+<script>
+// accessing html elements and kept in variables
+var list = document.querySelector('#list'),
+        form = document.querySelector('form'),
+        item = document.querySelector('#item');
+    //  get values from storage on loading
+    function getValues() {
+      var storedValues = window.localStorage.myitems;
+      console.log(storedValues)
+      if(!storedValues) {
+        list.innerHTML = '<li>Make a to do list</li>';
+      }
+      else {
+        list.innerHTML = storedValues;
+      }};
+      getValues();
+    // storing data into list and local storage 
+   form.addEventListener('submit',(e)=>{
+       e.preventDefault();
+      //  console.log(e)
+list.innerHTML = '<li>' +item.value+  '</li>';
+console.log(list.innerHTML)
+store();
+item.value = "";
+});
+
+function store() {
+      window.localStorage.myitems = list.innerHTML;
+    }
+    list.addEventListener('click',(e)=>{
+
+        console.log(e)
+        var tar=e.target;
+        console.log(tar.classList.contains('checked'));
+        if(tar.classList.contains('checked')){
+        tar.parentNode.removeChild(tar);
+      } else {
+        tar.classList.add('checked');
+      var del= document.createElement('button');
+      tar.appendChild(del)
+      }
+      store();
+    });    
+   
+</script>
+</html>
